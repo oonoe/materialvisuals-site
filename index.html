@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#05070d" />
+    <script>
+      /* тема до первой отрисовки — без мигания белого */
+      (function () {
+        var t = null;
+        try {
+          t = localStorage.getItem("mv-theme");
+        } catch (e) {}
+        document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+      })();
+    </script>
+    <meta
+      name="description"
+      content="Material Visuals — Fabric-клиент для Minecraft 1.21.11: голосовое управление, медиа-виджет, свой HUD и стабильный FPS. Скачай бесплатно."
+    />
+    <meta property="og:title" content="Material Visuals — клиент для Minecraft 1.21.11" />
+    <meta
+      property="og:description"
+      content="Голосовое управление, медиа-виджет и стабильный FPS. Скачай Material Visuals бесплатно."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://materialvisuals.fun/" />
+    <meta property="og:site_name" content="Material Visuals" />
+    <meta property="og:image" content="https://materialvisuals.fun/assets/logo.jpg" />
+    <meta property="og:image:width" content="640" />
+    <meta property="og:image:height" content="640" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Material Visuals — клиент для Minecraft 1.21.11" />
+    <meta
+      name="twitter:description"
+      content="Голосовое управление, медиа-виджет и стабильный FPS. Скачай Material Visuals бесплатно."
+    />
+    <meta name="twitter:image" content="https://materialvisuals.fun/assets/logo.jpg" />
+    <link rel="canonical" href="https://materialvisuals.fun/" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/logo.png" />
+    <link rel="preload" as="image" href="assets/hero-bg.jpg?v=2" fetchpriority="high" />
+    <link rel="preload" as="image" href="assets/screen-gui.jpg" />
+    <title>Material Visuals — клиент для Minecraft 1.21.11</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Material Visuals",
+        "url": "https://materialvisuals.fun/",
+        "logo": "https://materialvisuals.fun/assets/logo.png",
+        "description": "Material Visuals — бесплатный Fabric-клиент для Minecraft 1.21.11: голосовое управление, медиа-виджет и стабильный FPS.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Windows"
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Material Visuals",
+        "alternateName": "MaterialVisuals",
+        "url": "https://materialvisuals.fun/",
+        "image": "https://materialvisuals.fun/assets/logo.jpg",
+        "description": "Бесплатный Fabric-клиент для Minecraft 1.21.11: голосовое управление, медиа-виджет, свой HUD и стабильный FPS.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Windows 10/11",
+        "softwareVersion": "1.0",
+        "gamePlatform": "Minecraft 1.21.11, Fabric Loader 0.18.4+",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Как скачать и установить Material Visuals?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Нажми «Скачать клиент», затем помести полученный jar в .minecraft/mods и запусти игру через профиль Fabric. Подробные шаги есть в разделе «Скачать»."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Какие требования у клиента?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Minecraft 1.21.11, Fabric Loader 0.18.4+, Fabric API, Java 21 (64-bit) и Windows 10/11."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Работает ли голосовое управление без интернета?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Да. Распознавание речи выполняется локально на твоём компьютере — интернет для голосовых команд не нужен."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Нужен ли оригинальный Minecraft?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Да, клиент — это мод для официальной игры: аккаунт Minecraft обязателен, сам клиент распространяется бесплатно."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Где получить поддержку?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "В Telegram-канале (ссылка в подвале сайта). Там же публикуются релизы и собираются баг-репорты."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Как установить Material Visuals",
+        "totalTime": "PT2M",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Установи Fabric Loader",
+            "text": "Поставь Fabric Loader 0.18.4+ для Minecraft 1.21.11."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Скопируй мод",
+            "text": "Скопируй MaterialVisuals.jar в папку .minecraft/mods."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Запусти игру",
+            "text": "Запусти игру через профиль Fabric — клиент готов."
+          }
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=2" />
+  </head>
+
+  <body>
+    <!-- прогресс чтения страницы -->
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- свет за курсором -->
+    <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+    <!-- фон: сетка + световые пятна -->
+    <div class="bg-layers" aria-hidden="true">
+      <div class="bg-grid"></div>
+      <div class="bg-glow bg-glow--violet"></div>
+      <div class="bg-glow bg-glow--cyan"></div>
+      <div class="bg-noise"></div>
+    </div>
+
+    <!-- ======================= ШАПКА ======================= -->
+    <header class="header" id="header">
+      <div class="container header__inner">
+        <a class="brand" href="#home" aria-label="Material Visuals — на главную">
+          <span class="brand__mark" aria-hidden="true"><img src="assets/logo.jpg" alt="" /></span>
+          <span class="brand__name">Material Visuals</span>
+        </a>
+
+        <nav class="nav" id="nav" aria-label="Основная навигация">
+          <a class="nav__link" href="#features">Возможности</a>
+          <a class="nav__link" href="#compare">Сравнение</a>
+          <a class="nav__link" href="#gallery">Скриншоты</a>
+          <a class="nav__link" href="#download">Скачать</a>
+          <a class="nav__link" href="#changelog">Обновления</a>
+          <a class="nav__link" href="#faq">FAQ</a>
+        </nav>
+
+        <div class="header__actions">
+          <div class="theme-switch" role="radiogroup" aria-label="Тема оформления">
+            <button class="theme-switch__btn is-active" type="button" data-theme-set="dark" role="radio" aria-checked="true" aria-label="Тёмная тема">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+            <button class="theme-switch__btn" type="button" data-theme-set="light" role="radio" aria-checked="false" aria-label="Светлая тема">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+                <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+          <a class="btn btn--small btn--primary" href="#download" data-download>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Скачать
+          </a>
+          <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ======================= ГЕРОЙ ======================= -->
+      <section class="hero" id="home">
+        <!-- полноэкранный кинематографичный фон -->
+        <div class="hero__bg" aria-hidden="true"></div>
+        <div class="hero__shade" aria-hidden="true"></div>
+
+        <div class="container hero__inner">
+          <div class="hero__content" data-reveal>
+            <h1 class="hero__title">
+              Лучший визуальный мод<br />
+              <span class="gradient-text">MaterialVisuals</span>
+            </h1>
+
+            <p class="hero__subtitle">
+              Fabric-клиент для Minecraft 1.21.11: голосовое управление,
+              медиа-виджет, свой HUD и стабильный FPS. Скачал, положил в
+              <code>mods</code> — и играешь.
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn btn--primary btn--large" href="#download" data-download>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Скачать клиент
+              </a>
+              <a class="btn btn--ghost btn--large" href="#features">Возможности</a>
+            </div>
+
+            <ul class="hero__meta">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                Fabric 0.18.4+
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                Java 21
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                Windows 10/11
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6l7-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg>
+                Без вирусов и рекламы
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- полоса фактов -->
+        <div class="container">
+          <ul class="facts" data-reveal>
+            <li><b data-mc-version>1.21.11</b><span>Версия Minecraft</span></li>
+            <li><b>0.18.4</b><span>Fabric Loader</span></li>
+            <li><b>21</b><span>Java</span></li>
+            <li><b data-version>1.0</b><span>Версия клиента</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ======================= ВОЗМОЖНОСТИ ======================= -->
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section__head" data-reveal>
+            <span class="eyebrow">Возможности</span>
+            <h2 class="section__title">Что внутри</h2>
+            <p class="section__lead">Коротко о том, ради чего клиент ставят.</p>
+          </div>
+
+          <div class="bento">
+            <article class="card card--wide" data-reveal>
+              <div class="card__icon card__icon--violet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3Z" />
+                  <path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6" />
+                </svg>
+              </div>
+              <h3>Голосовое управление</h3>
+              <p>
+                Сказал команду — клиент выполнил. Распознавание идёт через Whisper
+                прямо на твоём ПК, интернет не нужен.
+              </p>
+            </article>
+
+            <article class="card" data-reveal data-delay="80">
+              <div class="card__icon card__icon--cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 17V6l10-2v11" />
+                  <circle cx="6.5" cy="17.5" r="2.5" />
+                  <circle cx="16.5" cy="15.5" r="2.5" />
+                </svg>
+              </div>
+              <h3>Медиа-виджет</h3>
+              <p>Видно, что играет: трек, обложка и переключение прямо в игре.</p>
+            </article>
+
+            <article class="card" data-reveal data-delay="140">
+              <div class="card__icon card__icon--lime">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="16" rx="2" />
+                  <path d="M3 9h18M9 9v11" />
+                </svg>
+              </div>
+              <h3>Material-интерфейс</h3>
+              <p>Тёмные панели, понятные меню, ничего лишнего. Всё находится с первого раза.</p>
+            </article>
+
+            <article class="card" data-reveal data-delay="80">
+              <div class="card__icon card__icon--violet">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
+                </svg>
+              </div>
+              <h3>Стабильный FPS</h3>
+              <p>Меньше просадок в драках и на хардкорных серверах — рендер переписан под новые версии.</p>
+            </article>
+
+            <article class="card" data-reveal data-delay="140">
+              <div class="card__icon card__icon--cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="13" rx="2" />
+                  <path d="M8 21h8M12 17v4M7 9h5M7 12h3" />
+                </svg>
+              </div>
+              <h3>Свой HUD</h3>
+              <p>Координаты, FPS, броня, кулдауны — выноси на экран то, что нужно именно тебе.</p>
+            </article>
+
+            <article class="card card--wide" data-reveal data-delay="140">
+              <div class="card__icon card__icon--lime">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3 3 7.5v9L12 21l9-4.5v-9L12 3Z" />
+                  <path d="M3 7.5 12 12l9-4.5M12 12v9" />
+                </svg>
+              </div>
+              <h3>Простая установка</h3>
+              <p>
+                Обычный Fabric-мод: положил <code>MaterialVisuals.jar</code> в папку
+                <code>mods</code> и запускаешь. Обновления — замена одного файла,
+                настройки на месте.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= СРАВНЕНИЕ ======================= -->
+      <section class="section" id="compare">
+        <div class="container">
+          <div class="section__head" data-reveal>
+            <span class="eyebrow">Сравнение</span>
+            <h2 class="section__title">Клиент против <span class="gradient-text">ванили</span></h2>
+            <p class="section__lead">
+              Что появляется в игре, если поставить Material Visuals рядом с обычным Minecraft.
+            </p>
+          </div>
+
+          <div class="compare-wrap" data-reveal>
+            <table class="compare">
+              <thead>
+                <tr>
+                  <th>Возможность</th>
+                  <th>Material Visuals</th>
+                  <th>Ванильный Minecraft</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Свой HUD: координаты, FPS, броня, кулдауны</td>
+                  <td class="compare__yes">есть</td>
+                  <td class="compare__no">нет</td>
+                </tr>
+                <tr>
+                  <td>Панель Material: модули и настройки в игре</td>
+                  <td class="compare__yes">есть</td>
+                  <td class="compare__no">нет</td>
+                </tr>
+                <tr>
+                  <td>Медиа-виджет: трек и обложка прямо в игре</td>
+                  <td class="compare__yes">есть</td>
+                  <td class="compare__no">нет</td>
+                </tr>
+                <tr>
+                  <td>Голосовое управление без интернета</td>
+                  <td class="compare__yes">есть</td>
+                  <td class="compare__no">нет</td>
+                </tr>
+                <tr>
+                  <td>Оптимизация: меньше просадок FPS</td>
+                  <td class="compare__yes">есть</td>
+                  <td class="compare__no">базовая</td>
+                </tr>
+                <tr>
+                  <td>Установка и обновление одним jar-файлом</td>
+                  <td class="compare__yes">есть</td>
+                  <td class="compare__no">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= СКРИНШОТЫ ======================= -->
+      <section class="section section--alt" id="gallery">
+        <div class="container">
+          <div class="section__head" data-reveal>
+            <span class="eyebrow">Скриншоты</span>
+            <h2 class="section__title">Как это <span class="gradient-text">выглядит</span></h2>
+            <p class="section__lead">Скриншоты из игры. Кликни — откроется во весь экран.</p>
+          </div>
+
+          <div class="gallery" id="gallery-grid" data-reveal>
+            <!-- рендерится script.js из config.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= ДОВЕРИЕ ======================= -->
+      <section class="section" id="trust">
+        <div class="container">
+          <div class="section__head" data-reveal>
+            <span class="eyebrow">Гарантии</span>
+            <h2 class="section__title">Без подвоха и мусора</h2>
+            <p class="section__lead">
+              Один jar-файл: без рекламы, без вирусов и без лишних установщиков.
+            </p>
+          </div>
+
+          <div class="guarantees" data-reveal data-delay="80">
+            <div class="guarantee">
+              <span class="guarantee__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3l7 3v6c0 4.4-3 7.4-7 9-4-1.6-7-4.6-7-9V6l7-3Z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              </span>
+              <div><b>Без вирусов</b><small>чистый jar, без установщиков</small></div>
+            </div>
+            <div class="guarantee">
+              <span class="guarantee__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="m6 6 12 12" />
+                </svg>
+              </span>
+              <div><b>Без рекламы</b><small>ничего не всплывает</small></div>
+            </div>
+            <div class="guarantee">
+              <span class="guarantee__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13M10 11v5M14 11v5" />
+                </svg>
+              </span>
+              <div><b>Легко удалить</b><small>убрал из mods — и всё</small></div>
+            </div>
+            <div class="guarantee">
+              <span class="guarantee__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 12a8 8 0 0 1-13.7 5.7L4 16M4 12a8 8 0 0 1 13.7-5.7L20 8" />
+                  <path d="M4 20v-4h4M20 4v4h-4" />
+                </svg>
+              </span>
+              <div><b>Частые обновления</b><small>под новые версии MC</small></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ======================= СКАЧАТЬ ======================= -->
+      <section class="section" id="download">
+        <div class="container">
+          <div class="section__head" data-reveal>
+            <span class="eyebrow">Скачать</span>
+            <h2 class="section__title">Поставь за <span class="gradient-text">минуту</span></h2>
+          </div>
+
+          <div class="download" data-reveal>
+            <div class="download__main">
+              <div class="download__head">
+                <span class="download__logo"><img src="assets/logo.jpg" alt="Логотип Material Visuals" /></span>
+                <div>
+                  <div class="download__badge">Стабильная версия</div>
+                  <h3 class="download__name">Material Visuals <span data-version>1.0</span></h3>
+                </div>
+              </div>
+              <ul class="download__props">
+                <li><span>Платформа</span><b>Windows 10/11 · x64</b></li>
+                <li><span>Minecraft</span><b data-mc-version>1.21.11</b></li>
+                <li><span>Загрузчик</span><b>Fabric Loader 0.18.4+</b></li>
+                <li><span>Формат</span><b>jar-мод</b></li>
+              </ul>
+
+              <a class="btn btn--primary btn--large btn--block" href="#download" data-download>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span data-download-label>Скачать Material Visuals</span>
+              </a>
+              <p class="download__note">Бесплатно · без установщиков и рекламы</p>
+
+              <ul class="guarantee-list">
+                <li>Чистый файл, проверенный перед релизом</li>
+                <li>Бесплатно навсегда, без скрытых платежей</li>
+                <li>Удаляется одним файлом из папки mods</li>
+              </ul>
+            </div>
+
+            <div class="download__side">
+              <h4>Системные требования</h4>
+              <ul class="reqs">
+                <li><b>Minecraft</b><span data-mc-version>1.21.11</span></li>
+                <li><b>Fabric Loader</b><span>0.18.4 или новее</span></li>
+                <li><b>Fabric API</b><span>последняя версия</span></li>
+                <li><b>Java</b><span>21 (64-bit)</span></li>
+                <li><b>ОС</b><span>Windows 10/11 x64</span></li>
+              </ul>
+
+              <h4 class="download__steps-title">Установка</h4>
+              <ol class="steps">
+                <li><b>1</b> Поставь Fabric Loader 0.18.4+ для Minecraft <span data-mc-version>1.21.11</span></li>
+                <li><b>2</b> Скопируй <code>MaterialVisuals.jar</code> в папку <code>.minecraft/mods</code></li>
+                <li><b>3</b> Запусти игру через профиль Fabric — клиент готов</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= ОБНОВЛЕНИЯ ======================= -->
+      <section class="section section--alt" id="changelog">
+        <div class="container">
+          <div class="section__head" data-reveal>
+            <span class="eyebrow">Обновления</span>
+            <h2 class="section__title">Что <span class="gradient-text">нового</span></h2>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline__item" data-reveal>
+              <div class="timeline__dot"></div>
+              <div class="timeline__card">
+                <div class="timeline__head">
+                  <b>v<span data-version>1.0</span></b>
+                  <span class="tag tag--green">релиз</span>
+                </div>
+                <h3>Первый публичный релиз</h3>
+                <ul>
+                  <li>Голосовое управление на движке Whisper</li>
+                  <li>Медиа-виджет с информацией о треке</li>
+                  <li>Material-темы интерфейса и HUD</li>
+                  <li>Поддержка Minecraft 1.21.11 + Fabric</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="timeline__item" data-reveal data-delay="100">
+              <div class="timeline__dot"></div>
+              <div class="timeline__card">
+                <div class="timeline__head">
+                  <b>roadmap</b>
+                  <span class="tag">в работе</span>
+                </div>
+                <h3>Дальше</h3>
+                <ul>
+                  <li>Свои лаунчер и аккаунты</li>
+                  <li>Конструктор HUD из браузера</li>
+                  <li>Обновления в один клик</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= FAQ ======================= -->
+      <section class="section" id="faq">
+        <div class="container container--narrow">
+          <div class="section__head" data-reveal>
+            <span class="eyebrow">FAQ</span>
+            <h2 class="section__title">Частые <span class="gradient-text">вопросы</span></h2>
+          </div>
+
+          <div class="faq" data-reveal>
+            <div class="faq__item">
+              <button class="faq__q" type="button" aria-expanded="false">
+                <span>Как скачать и установить Material Visuals?</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <div class="faq__a">
+                <p>
+                  Нажми «Скачать клиент», затем помести полученный jar в
+                  <code>.minecraft/mods</code> и запусти игру через профиль Fabric.
+                  Подробные шаги есть в разделе «Скачать».
+                </p>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <button class="faq__q" type="button" aria-expanded="false">
+                <span>Какие требования у клиента?</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <div class="faq__a">
+                <p>
+                  Minecraft <b data-mc-version>1.21.11</b>, Fabric Loader 0.18.4+,
+                  Fabric API, Java 21 (64-bit) и Windows 10/11.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <button class="faq__q" type="button" aria-expanded="false">
+                <span>Работает ли голосовое управление без интернета?</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <div class="faq__a">
+                <p>
+                  Да. Распознавание речи выполняется локально на твоём компьютере —
+                  интернет для голосовых команд не нужен.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <button class="faq__q" type="button" aria-expanded="false">
+                <span>Нужен ли оригинальный Minecraft?</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <div class="faq__a">
+                <p>
+                  Да, клиент — это мод для официальной игры: аккаунт Minecraft
+                  обязателен, сам клиент распространяется бесплатно.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq__item">
+              <button class="faq__q" type="button" aria-expanded="false">
+                <span>Где получить поддержку?</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <div class="faq__a">
+                <p>
+                  Лучше всего — в нашем Discord/Telegram (ссылки в подвале сайта).
+                  Там же публикуются релизы и собираются баг-репорты.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= ФИНАЛЬНЫЙ CTA ======================= -->
+      <section class="section cta">
+        <div class="container">
+          <div class="cta__card" data-reveal>
+            <div class="cta__glow" aria-hidden="true"></div>
+            <img class="cta__logo" src="assets/logo.jpg" alt="Логотип Material Visuals" />
+            <h2>Скачивай и заходи</h2>
+            <p>Бесплатно, один jar-файл, ставится за минуту.</p>
+            <a class="btn btn--light btn--large" href="#download" data-download>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              Скачать бесплатно
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======================= ПОДВАЛ ======================= -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__brand">
+          <a class="brand" href="#home">
+            <span class="brand__mark" aria-hidden="true"><img src="assets/logo.jpg" alt="" /></span>
+            <span class="brand__name">Material Visuals</span>
+          </a>
+          <p>Fabric-клиент для Minecraft 1.21.11.</p>
+          <div class="footer__socials" id="socials">
+            <!-- рендерится script.js из config.js -->
+          </div>
+        </div>
+
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h5>Клиент</h5>
+            <a href="#features">Возможности</a>
+            <a href="#compare">Сравнение</a>
+            <a href="#gallery">Скриншоты</a>
+            <a href="#download">Скачать</a>
+            <a href="#changelog">Обновления</a>
+          </div>
+          <div class="footer__col">
+            <h5>Помощь</h5>
+            <a href="#faq">FAQ</a>
+            <a href="#download">Установка</a>
+            <a href="#" data-social="support">Баг-репорт</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer__bottom">
+        <span>© <span id="year">2026</span> Material Visuals. Все права защищены.</span>
+        <span class="footer__disclaimer">
+          Не является продуктом Mojang Studios или Microsoft. Minecraft — торговая марка Mojang AB.
+        </span>
+      </div>
+    </footer>
+
+    <!-- лайтбокс -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox__close" type="button" aria-label="Закрыть">✕</button>
+      <img src="" alt="" id="lightbox-img" />
+      <p id="lightbox-caption"></p>
+    </div>
+
+    <!-- уведомление -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="config.js?v=2"></script>
+    <script src="script.js?v=2"></script>
+  </body>
+</html>
